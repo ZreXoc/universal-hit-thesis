@@ -94,3 +94,21 @@
 
   content
 }
+
+#let u_ = context {
+ box(width: 1fr, stroke: (bottom: underline.stroke), baseline: underline.offset -.25em, outset: (y:0.25em))
+}
+
+// 占满全宽度的居中下划线：____a̲b̲c̲___
+#let u(body) = context {
+  let single_line_height = measure(text("A")).height
+
+  if measure(body).height < single_line_height*1.01 {
+    u_
+    body
+    u_
+  } else {
+    body
+    u_
+  }
+}
